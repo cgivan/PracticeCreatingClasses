@@ -8,7 +8,6 @@ namespace Treehouse.MediaLibrary
         {
             try
             {
-                //random comment
                 var album1 = new Album("Ten", "Pearl Jam");
                 var album2 = new Album("The Wall", "Pink Floyd");
                 var album3 = new Album("Ride The Lightning", "Metallica");
