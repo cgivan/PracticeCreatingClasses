@@ -8,54 +8,70 @@ namespace Treehouse.MediaLibrary
         {
             try
             {
-                var album1 = new Album("Ten", "Pearl Jam");
-                var album2 = new Album("The Wall", "Pink Floyd");
-                var album3 = new Album("Ride The Lightning", "Metallica");
-                var book = new Book("Animal Farm", "George Orwell");
-                var movie = new Movie("Back to School", "Alan Metter");
+                var mediaLibrary = new MediaLibrary(new MediaType[]
+                {
+                    new Album("Ten", "Pearl Jam"),
+                    new Album("The Wall", "Pink Floyd"),
+                    new Album("Ride The Lightning", "Metallica"),
+                    new Book("Animal Farm", "George Orwell"),
+                    new Movie("Back to School", "Alan Metter")
+                });
 
-                DetectMediaType(album1);
-                DetectMediaType(album2);
-                DetectMediaType(album3);
-                DetectMediaType(book);
-                DetectMediaType(movie);
+                Console.Write("Search library: ");
+                string searchFor = Console.ReadLine();
+                var item = mediaLibrary.FindItem(searchFor);
 
-                Console.WriteLine(album1.GetDisplayText());
-                Console.WriteLine(album2.GetDisplayText());
-                Console.WriteLine(album3.GetDisplayText());
-                Console.WriteLine(book.GetDisplayText());
-                Console.WriteLine(movie.GetDisplayText());
+                if(item != null)
+                {
+                    MediaLibrary.DisplayItem(item);
+                }
+                else
+                {
+                    Console.WriteLine(searchFor + ": Item not found!");
+                }
 
-                album1.Loan("Joe Smith");
-                album2.Loan();
-                book.Loan();
-                movie.Loan();
+                //Console.WriteLine("# of items: " + mediaLibrary.NumberOfItems);
 
-                Console.WriteLine(album1.GetDisplayText());
-                Console.WriteLine(album2.GetDisplayText());
-                Console.WriteLine(book.GetDisplayText());
-                Console.WriteLine(movie.GetDisplayText());
+                //mediaLibrary.DisplayItems();
 
-                album1.Return();
-                album2.Return();
-                book.Return();
-                movie.Return();
+                //DetectMediaType(album1);
+                //DetectMediaType(album2);
+                //DetectMediaType(album3);
+                //DetectMediaType(book);
+                //DetectMediaType(movie);
 
-                Console.WriteLine(album1.GetDisplayText());
-                Console.WriteLine(album2.GetDisplayText());
-                Console.WriteLine(book.GetDisplayText());
-                Console.WriteLine(movie.GetDisplayText());
+                //Console.WriteLine(album1.GetDisplayText());
+                //Console.WriteLine(album2.GetDisplayText());
+                //Console.WriteLine(album3.GetDisplayText());
+                //Console.WriteLine(book.GetDisplayText());
+                //Console.WriteLine(movie.GetDisplayText());
 
-                //var book = new Book("Animal Farm", "George Orwell");
-                //var movie = new Movie("Back to School", "Alan Metter");
+                //album1.Loan("Joe Smith");
+                //album2.Loan();
+                //book.Loan();
+                //movie.Loan();
 
-                //Console.WriteLine("Book: " + book.Title + " by " + book.Author);
-                //Console.WriteLine("Movie: " + movie.Title + " by " + movie.Director);
+                //Console.WriteLine(album1.GetDisplayText());
+                //Console.WriteLine(album2.GetDisplayText());
+                //Console.WriteLine(book.GetDisplayText());
+                //Console.WriteLine(movie.GetDisplayText());
+
+                //album1.Return();
+                //album2.Return();
+                //book.Return();
+                //movie.Return();
+
+                //Console.WriteLine(album1.GetDisplayText());
+                //Console.WriteLine(album2.GetDisplayText());
+                //Console.WriteLine(book.GetDisplayText());
+                //Console.WriteLine(movie.GetDisplayText());
+
+                Console.WriteLine("\nPress any key to quit.");
                 Console.ReadLine();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex);
+                Console.WriteLine("Exception: " + ex.Message);
                 Console.ReadLine();
             }
 
@@ -63,6 +79,10 @@ namespace Treehouse.MediaLibrary
 
         static void DetectMediaType(MediaType item)
         {
+            if (item == null)
+            {
+                return;
+            }
             if (item is Album)
             {
                 Console.WriteLine(item.Title + " is an album!");

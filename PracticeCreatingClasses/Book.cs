@@ -4,31 +4,15 @@ namespace Treehouse.MediaLibrary
 {
     class Book : MediaType
     {
-        public readonly string Author;
+        public string Author { get; private set; }
+
+        public string DisplayText =>
+            "Book: " + Title + " by " + Author + OnLoanDisplayText;
 
         public Book(string title, string author)
             : base(title)
         {
             Author = author;
         }
-
-        public string GetDisplayText()
-        {
-            string text = "Book: " + Title + " by " + Author;
-            if (OnLoan)
-            {
-                if (!string.IsNullOrEmpty(Loanee))
-                {
-                    text += " (Currently on loan to " + Loanee + ")";
-                }
-                else
-                {
-                    text += " (Currently on loan)";
-                }
-            }
-
-            return text;
-        }
     }
 }
-
